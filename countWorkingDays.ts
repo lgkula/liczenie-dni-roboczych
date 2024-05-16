@@ -1,7 +1,7 @@
 import dayjs, { Dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { holidaysDays } from './holidayTable';
+import { holidayDays } from './holidayTable';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -14,7 +14,7 @@ const isWeekendOrHoliday = (date: Dayjs): boolean => {
     const isWeekend = (): boolean =>  dayOfWeek === 0 || dayOfWeek === 6;
 
     const isHoliday = (): boolean =>
-      holidaysDays.some(
+      holidayDays.some(
         (holiday) => holiday.holidayDate.slice(0, 10) === dateString
       );
     return isWeekend() || isHoliday();
