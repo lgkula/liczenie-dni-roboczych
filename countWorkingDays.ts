@@ -8,15 +8,16 @@ dayjs.extend(timezone);
 dayjs.tz.setDefault('Europe/Warsaw');
 
 const isWeekendOrHoliday = (date: Dayjs): boolean => {
-    const dayOfWeek = date.day();
+    const dayOfWeek: number = date.day();
     const dateString = date.format('YYYY-MM-DD');
 
-    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    const isWeekend = (): boolean =>  dayOfWeek === 0 || dayOfWeek === 6;
 
-    const isHoliday = holidaysDays.some(
-        (holiday) => holiday.swi_Data.slice(0, 10) === dateString,
-    );
-    return isWeekend || isHoliday;
+    const isHoliday = (): boolean =>
+      holidaysDays.some(
+        (holiday) => holiday.holidayDate.slice(0, 10) === dateString
+      );
+    return isWeekend() || isHoliday();
 };
 
 export const countWorkingDays = (
@@ -38,4 +39,3 @@ export const countWorkingDays = (
 };
 
 console.log(countWorkingDays(14));
-
