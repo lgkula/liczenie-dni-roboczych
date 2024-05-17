@@ -1,9 +1,9 @@
-interface HolidaysDays {
+export interface HolidayDay {
     holidayDate: string;
     holidayName: string;
 }
 
-export const holidayDays: HolidaysDays[] = [
+export const holidayDays: HolidayDay[] = [
     {
         holidayDate: '2024-01-01T00:00:00',
         holidayName: 'Nowy Rok',
