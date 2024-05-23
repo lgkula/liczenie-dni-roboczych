@@ -1,7 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { HolidayDay, holidayDays } from './holidayTable';
 import { isWeekendOrHoliday } from './checkIfWorkingDay';
 
 dayjs.extend(utc);
