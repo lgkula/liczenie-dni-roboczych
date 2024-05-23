@@ -8,7 +8,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault('Europe/Warsaw');
 
-export const countWorkingDays = ({
+export const countAllDays = ({
   numberOfDaysToAdd = 14,
   dateStart = dayjs.tz(),
   dateFormat = "YYYY-MM-DD",
@@ -20,17 +20,13 @@ export const countWorkingDays = ({
   if (!Number.isInteger(numberOfDaysToAdd) || numberOfDaysToAdd < 1) {
     throw new Error("Number of days to add must be a positive integer");
   }
-  let nextDay: Dayjs = dateStart;
+  let lastDay: Dayjs = dateStart.add(numberOfDaysToAdd, "day");
 
-  while (numberOfDaysToAdd > 0) {
-    nextDay = nextDay.add(1, "day");
-    if (!isWeekendOrHoliday(nextDay)) {
-      numberOfDaysToAdd--;
-    }
+  while (isWeekendOrHoliday(lastDay)) {
+    lastDay = lastDay.add(1, "day");
   }
-  return nextDay.format(dateFormat);
+  return lastDay.format(dateFormat);
 };
 
-
 // Template run
-console.log(countWorkingDays({}));
+console.log(countAllDays({}));
